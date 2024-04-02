@@ -4,7 +4,6 @@ st=[1]*N
 
 for i in range(N):
     dungchi.append(list(map(int, input().split())))
-    dungchi[i].append(1)
 
 for i in range(N):
     for j in range(N):
