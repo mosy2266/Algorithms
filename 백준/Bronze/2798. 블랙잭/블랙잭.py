@@ -1,8 +1,14 @@
-from itertools import combinations
-
 N,M=map(int, input().split())
-cards=list(map(int, input().split()))
-combs=list(combinations(cards, 3))
-sums=set([sum(x) for x in combs if sum(x)<=M])
+cards=sorted(list(map(int, input().split())), reverse=True)
 
-print(max(sums))
+result=0
+for i in range(N-2):
+    for j in range(i+1, N-1):
+        for k in range(j+1, N):
+            sum=cards[i]+cards[j]+cards[k]
+            if sum<=M:
+                if result<sum:
+                    result=sum
+                break
+
+print(result)
