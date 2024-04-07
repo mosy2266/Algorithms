@@ -1,7 +1,7 @@
 N=int(input())
 
 min_num=0
-for i in range(2, N):
+for i in range((10**(len(str(N))-1))//2, N):
     div_sum=i
     num=i
     k=6
