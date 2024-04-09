@@ -3,7 +3,6 @@ from collections import deque
 N=int(input())
 prcs=list(map(int, input().split()))
 prcs=prcs[-1::-1]
-cards=[i for i in range(1,N+1)]
 
 answer=deque([])
 
