@@ -18,11 +18,9 @@ while k<=N:
         else:
             if prc==1:
                 answer.appendleft(k)
-                k+=1
             elif prc==2:
                 answer.insert(1, k)
-                k+=1
             else:
                 answer.append(k)
-                k+=1
+            k+=1
 print(*answer)
