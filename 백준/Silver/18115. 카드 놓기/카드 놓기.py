@@ -2,14 +2,14 @@ from collections import deque
 
 N=int(input())
 prcs=list(map(int, input().split()))
-r_prcs=prcs[-1::-1]
+prcs=prcs[-1::-1]
 cards=[i for i in range(1,N+1)]
 
 answer=deque([])
 
 k=1
 while k<=N:
-    for prc in r_prcs:
+    for prc in prcs:
         if len(answer)<=1:
             if prc==1:
                 answer.appendleft(k)
