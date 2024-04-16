@@ -1,24 +1,24 @@
 import sys
 input=sys.stdin.readline
 
-sentence=""
 while True:
-    parenthesis=[]
-    sentence=list(input().rstrip())
-    
-    if sentence==["."]:
+    sen=input().rstrip()
+    if sen==".":
         break
 
-    for x in sentence:
-        if x=="(" or x==")" or x=="[" or x=="]":
-            parenthesis.append(x)
+    if sen.count("(")!=sen.count(")") or sen.count("[")!=sen.count("]"):
+        print("no")
+        continue
 
-    parenth="".join(parenthesis)
-
+    parenth=""
+    for s in sen:
+        if s in "()[]":
+            parenth+=s
+    
     while "()" in parenth or "[]" in parenth:
         parenth=parenth.replace("()","")
         parenth=parenth.replace("[]","")
-
+    
     if not parenth:
         print("yes")
     else:
