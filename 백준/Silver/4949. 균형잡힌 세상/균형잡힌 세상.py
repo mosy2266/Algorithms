@@ -1,7 +1,10 @@
+import sys
+input=sys.stdin.readline
+
 sentence=""
 while True:
     parenthesis=[]
-    sentence=list(input())
+    sentence=list(input().rstrip())
     
     if sentence==["."]:
         break
