@@ -1,53 +1,22 @@
 import sys
 input=sys.stdin.readline
 
-class sets:
-    def __init__(self):
-        self.items=set()
-    
-    def add(self, x):
-        if x not in self.items:
-            self.items.add(x)
+S=set()
 
-    def remove(self, x):
-        if x in self.items:
-            self.items.remove(x)
-    
-    def check(self, x):
-        if x in self.items:
-            print(1)
-        else:
-            print(0)
-    
-    def toggle(self, x):
-        if x in self.items:
-            self.items.remove(x)
-        else:
-            self.items.add(x)
-    
-    def all(self):
-        self.items.update([i for i in range(1,21)])
-    
-    def empty(self):
-        self.items.clear()
-
-S=sets()
 for _ in range(int(input())):
     prcs=input().rstrip()
-    
+
     if "add" in prcs:
-        num=int(prcs[4:])
-        S.add(num)
+        S.add(int(prcs[4:]))
     elif "remove" in prcs:
-        num=int(prcs[7:])
-        S.remove(num)
+        S.discard(int(prcs[7:]))
     elif "check" in prcs:
         num=int(prcs[6:])
-        S.check(num)
+        print(1) if num in S else print(0)
     elif "toggle" in prcs:
         num=int(prcs[7:])
-        S.toggle(num)
+        S.remove(num) if num in S else S.add(num)
     elif prcs=="all":
-        S.all()
+        S.update([i for i in range(1,21)])
     elif prcs=="empty":
-        S.empty()
+        S.clear()
