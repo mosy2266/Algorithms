@@ -1,26 +1,27 @@
 import sys
-sys.setrecursionlimit(10**4)
+sys.setrecursionlimit(10**5)
 
 def solution(nodeinfo):
-    answer = [[], []]
+    answer = [[],[]]
     
     for i in range(len(nodeinfo)):
         nodeinfo[i].append(i+1)
     
-    nodeinfo.sort(key = lambda x: x[0])
+    nodeinfo.sort(key=lambda x: x[0])
     
-    def trav(nodes):
-        if nodes:
-            root=(0,-1,0)
-            for idx, (x,y,v) in enumerate(nodes):
-                if y > root[1]:
-                    root=(idx,y,v)
-            answer[0].append(root[-1])
-            left, right=nodes[:root[0]], nodes[root[0]+1:]
-            trav(left)
-            trav(right)
-            answer[1].append(root[-1])
+    def traverse(tree):
+        if tree:
+            n,y,idx = (-1,-1,-1)
+            for i in range(len(tree)):
+                if tree[i][1] > y:
+                    n,y,idx = tree[i][2], tree[i][1], i
+            left_tree = tree[:idx]
+            right_tree = tree[idx+1:]
+            answer[0].append(n)
+            traverse(left_tree)
+            traverse(right_tree)
+            answer[1].append(n)
     
-    trav(nodeinfo) 
+    traverse(nodeinfo)
+    
     return answer
-
