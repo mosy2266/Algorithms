@@ -1,31 +1,29 @@
-import heapq
-import math
+from collections import deque
 
-def solution(n, edge):    
-    INF = math.inf
+def solution(n, edge):
+    answer = 0
     graph = [[] for _ in range(n)]
-    
-    distance = [INF]*n
+    dist = [1]*n
     visited=[False]*n
     
     for e in edge:
         graph[e[0]-1].append(e[1]-1)
         graph[e[1]-1].append(e[0]-1)
-    
-    def dijk(start):
-        q = []
-        heapq.heappush(q, (0, start))
-        distance[start]=0
+        
+    def bfs(start):
+        q=deque([start])
+        visited[start]=True
         
         while q:
-            dist, now = heapq.heappop(q)
-            
-            if distance[now] < dist : continue
-            
-            for i in graph[now]:
-                if dist+1 < distance[i]:
-                    distance[i] = dist+1
-                    heapq.heappush(q, (dist+1, i))
-    dijk(0)
+            v=q.popleft()
+            prev=v
+            for n in graph[v]:
+                if not visited[n]:
+                    dist[n] += dist[prev]
+                    visited[n]=True
+                    q.append(n)
     
-    return distance.count(max(distance))
+    bfs(0)
+    dist.sort(reverse=True)
+    answer=dist.count(dist[0])
+    return answer
