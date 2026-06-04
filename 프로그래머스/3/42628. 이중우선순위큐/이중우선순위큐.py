@@ -1,19 +1,28 @@
+import heapq
+
 def solution(operations):
     answer = [0,0]
-    q = []
+    max_h = []
+    min_h = []
     
     for o in operations:
-        if o[0]=="I":
+        if o[0]=='I':
             num = int(o[2:])
-            q.append(num)
+            heapq.heappush(max_h, -num)
+            heapq.heappush(min_h, num)
         else:
-            if q:
-                if o[2]=="-":
-                    q.remove(min(q))
+            if max_h or min_h:
+                if o[2]=='-':
+                    num = heapq.heappop(min_h)
+                    if -num in max_h: max_h.remove(-num)
                 else:
-                    q.remove(max(q))
+                    num = -heapq.heappop(max_h)
+                    if num in min_h: min_h.remove(num)
     
-    if q:
-        answer[0], answer[1] = max(q), min(q)
+    if max_h:
+        answer[0] = -heapq.heappop(max_h)
+    
+    if min_h:
+        answer[1] = heapq.heappop(min_h)
     
     return answer
