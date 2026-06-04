@@ -1,7 +1,6 @@
 from collections import deque
 
 def solution(n, edge):
-    answer = 0
     graph = [[] for _ in range(n)]
     dist = [1]*n
     visited=[False]*n
@@ -25,5 +24,5 @@ def solution(n, edge):
     
     bfs(0)
     dist.sort(reverse=True)
-    answer=dist.count(dist[0])
-    return answer
+    
+    return dist.count(dist[0])
