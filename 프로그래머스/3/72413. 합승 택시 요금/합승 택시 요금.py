@@ -2,37 +2,36 @@ import heapq, math
 
 def solution(n, s, a, b, fares):
     INF = math.inf
-    answer = 0
     graph = [[] for _ in range(n+1)]
-    charge = [0]*(n+1)
-    order=[s,a,b]
     
-    for fare in fares:
-        x,y,w = fare
+    points = [a,b,s]
+    charge = [0]*(n+1)
+    
+    
+    for x,y,w in fares:
         graph[x].append((y,w))
         graph[y].append((x,w))
     
     def dijk(start):
         q = []
         heapq.heappush(q, (0, start))
-        weight[start]=0
+        distance[start] = 0
         
         while q:
             dist, now = heapq.heappop(q)
-            if weight[now] < dist : continue
+            if distance[now]<dist: continue
+            
             for i in graph[now]:
                 cost = dist + i[1]
-                if weight[i[0]] > cost:
-                    weight[i[0]] = cost
+                if distance[i[0]] > cost:
+                    distance[i[0]] = cost
                     heapq.heappush(q, (cost, i[0]))
     
-    for o in order:
-        visited = [False]*(n+1)
-        weight = [INF]*(n+1)
-
-        dijk(o)
-
-        for j in range(1, n+1):
-            charge[j] += weight[j]
-                
+    for p in points:
+        distance = [INF]*(n+1)
+        dijk(p)
+        
+        for i in range(1,n+1):
+            charge[i] += distance[i]
+    
     return min(charge[1:])
