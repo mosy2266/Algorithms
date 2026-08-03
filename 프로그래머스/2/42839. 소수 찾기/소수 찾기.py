@@ -15,10 +15,7 @@ def solution(numbers):
     return len(primes)
 
 def is_prime(num):
-    if num == 0 or num == 1:
-        return False
-    if num == 2 or num == 3:
-        return True
+    if num<2: return False
 
     for i in range(2, int(math.sqrt(num))+1):
         if num % i == 0:
