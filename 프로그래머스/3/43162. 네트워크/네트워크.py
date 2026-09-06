@@ -2,8 +2,8 @@ from collections import deque
 
 def solution(n, computers):
     answer = 0
-    graph = [[] for _ in range(n)]
-    visited = [False]*n
+    graph = [[] for _ in range (n)]
+    visited = [False] * n
     
     for i in range(n):
         for j in range(n):
@@ -15,13 +15,12 @@ def solution(n, computers):
         
         while q:
             v = q.popleft()
-            visited[v]=True
+            visited[v] = True
             
-            for n in graph[v]:
-                if not visited[n]:
-                    visited[n]=True
-                    q.append(n)
-
+            for x in graph[v]:
+                if not visited[x]:
+                    visited[x] = True
+                    q.append(x)
     
     for i in range(n):
         if not visited[i]:
