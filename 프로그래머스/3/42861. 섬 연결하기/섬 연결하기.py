@@ -1,7 +1,10 @@
 def solution(n, costs):
     answer = 0
+    
+    #연결 정보 배열 초기화
     link = [i for i in range(n)]
     
+    #유니온 파인드 함수 정의
     def find(x):
         if link[x] == x:
             return x
@@ -10,23 +13,28 @@ def solution(n, costs):
             return link[x]
     
     def same(x,y):
-        return find(x)==find(y)
+        if find(x) == find(y):
+            return True
+        else: 
+            return False
     
     def unite(x,y):
         x,y = find(x), find(y)
-        if x==y: return
+        if x==y : return
+    
         link[y] = x
     
+    #풀이 코드
     edges = 0
-    costs.sort(key= lambda x: x[2])
-    
-    for a,b,w in costs:
-        if same(a,b): continue
+    costs.sort(key=lambda x: x[2])
+    for a,b,cost in costs:
+        if same(a,b) : continue
         
         unite(a,b)
-        answer+=w
+        answer+=cost
         edges+=1
         
-        if edges == n-1: break
+        if edges == n-1:
+            break
         
     return answer
